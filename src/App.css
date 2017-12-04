@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+}
+
+  .bg{
+    background-image: url("./bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+  }
+ 
+
+.todopad{
+  margin-top: 140px;
+}
+
+li{
+  list-style:none;
+}
+.list{
+  padding-top: 10px;
+}
