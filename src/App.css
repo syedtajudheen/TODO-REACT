@@ -22,8 +22,9 @@
 }
 
 li{
+  text-align: left;
   list-style:none;
 }
-.list{
-  padding-top: 10px;
+.list-group{
+  margin: auto 300px;
 }
