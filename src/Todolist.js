@@ -1,26 +1,57 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
+import { bindActionCreators } from'redux';
+import { fetchtodo } from './actions/action_todo.js'
 
 class Todolist extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            term:[]
+        }
+        this.formhandler=this.formhandler.bind(this);
+        this.changehandler=this.changehandler.bind(this);
+    }
+    componentDidMount() {
+        this.props.dispatch(fetchtodo());
+    }
+    changehandler(event){
+        event.preventDefault();
+        this.setState({term: event.target.value})
+    }
 
-        renderList() {
-        return( this.props.todo.map((todos) => {
-            return (<li className="list-group-item" key={todos.id}><input type="checkbox" value={todos.completed} /> &nbsp; {todos.title}</li>);
-        }));
+    formhandler(event){
+         event.preventDefault();
+    }
+
+  
+        renderList(data) {
+        
+            return (<li className="list-group-item" key={data.id}> &nbsp; {data.title}</li>);
+        
         }  
         
             render(){
                     return(<div>
-                                <ul>{this.renderList}</ul>   
+                                <form onSubmit={this.formhandler}>
+                                    <label>TODO : </label>
+                                    <input value={this.state.term} onChange={this.changehandler} type="text"  />
+                                    <button type="submit"  >ADD</button><br />
+                                    <ul>
+                                        {this.props.todos.map(this.renderList)}
+                                    </ul>  
+                                </form>
+                                 
                             </div>)
             }
         }
 
 
 function mapStateToProps(state) {
+    console.log(state);
     return {
-       todo: state.todos
+       todos: state.todos
     };
 }
 
