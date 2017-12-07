@@ -1,19 +1,30 @@
 import types from './actionTypes';
-import axios from 'axios';
-import {connect} from 'react-redux'
-import $ from 'jquery'; 
+import axios from 'axios'; 
 
-const URL = 'https://jsonplaceholder.typicode.com/todos';
+const URL = 'https://jsonprovider.herokuapp.com/todos?sort=createdAt%20DESC&limit=15';
 
 
 
 export function fetchtodo(){
     const request = axios.get(URL)
-  
     return{
-        type : types.ADD_TODO,
+        type : types.FETCH_TODO,
         payload: request
     }
+}
+
+export function addtodo(value){
+    console.log(value)
+    const postrequest = axios.post(URL, 
+        {
+        userID: 1,
+        title: value,
+        completed: false
+    })
+  return{
+      type : types.ADD_TODO,
+      payload : postrequest
+  }
 }
 
 

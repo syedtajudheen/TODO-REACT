@@ -2,46 +2,55 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from'redux';
-import { fetchtodo } from './actions/action_todo.js'
+import { fetchtodo, addtodo } from './actions/action_todo.js'
 
 class Todolist extends Component {
     constructor(props) {
         super(props);
         this.state={
-            term:[]
+            term:[],
+           checkbox: false
         }
-        this.formhandler=this.formhandler.bind(this);
-        this.changehandler=this.changehandler.bind(this);
+        this.Onformhandler=this.Onformhandler.bind(this);
+        this.Onchangehandler=this.Onchangehandler.bind(this);
+        this.togglecheckbox = this.togglecheckbox.bind(this);
     }
+    
     componentDidMount() {
         this.props.dispatch(fetchtodo());
     }
-    changehandler(event){
+    Onchangehandler(event){
         event.preventDefault();
         this.setState({term: event.target.value})
     }
-
-    formhandler(event){
+    Onformhandler(event){
          event.preventDefault();
+         this.props.dispatch(addtodo(this.state.term))
+    }
+    togglecheckbox(event){
+        event.preventDefault();
+        this.setState({ checkbox : !checkbox}) 
+        // this.setstate({term: event.target.value})
     }
 
   
-        renderList(data) {
+    renderList(data,index) {  
         
-            return (<li className="list-group-item" key={data.id}> &nbsp; {data.title}</li>);
-        
-        }  
+        return (<li className="list-group-item" key={index}> <input type="checkbox" onChange={this.togglecheckbox} /> &nbsp; {data.title}</li>); 
+    }  
         
             render(){
                     return(<div>
-                                <form onSubmit={this.formhandler}>
-                                    <label>TODO : </label>
-                                    <input value={this.state.term} onChange={this.changehandler} type="text"  />
-                                    <button type="submit"  >ADD</button><br />
-                                    <ul>
-                                        {this.props.todos.map(this.renderList)}
-                                    </ul>  
+                                <form onSubmit={this.Onformhandler}>
+                                    <div className="list-group-item">
+                                        <label >TODO : </label>
+                                        <input  value={this.state.term} onChange={this.Onchangehandler} type="text"  />
+                                        <button type="submit"  >ADD</button><br />  
+                                    </div>
                                 </form>
+                                <ul>
+                                    {this.props.todos.map(this.renderList)}
+                                </ul>
                                  
                             </div>)
             }

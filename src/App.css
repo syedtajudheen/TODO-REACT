@@ -22,9 +22,13 @@
 }
 
 li{
+  
   text-align: left;
   list-style:none;
 }
 .list-group{
   margin: auto 300px;
+}
+.list-group-item{
+   margin:auto 200px;
 }
