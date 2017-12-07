@@ -8,13 +8,17 @@ class Todolist extends Component {
     constructor(props) {
         super(props);
         this.state={
-            term:[],
-           checkbox: false
+                    term:[],
+                    checkbox: false
         }
+           
+
         this.Onformhandler=this.Onformhandler.bind(this);
         this.Onchangehandler=this.Onchangehandler.bind(this);
         this.togglecheckbox = this.togglecheckbox.bind(this);
     }
+    
+
     
     componentDidMount() {
         this.props.dispatch(fetchtodo());
@@ -24,19 +28,25 @@ class Todolist extends Component {
         this.setState({term: event.target.value})
     }
     Onformhandler(event){
+        const data = {
+            title: this.state.term,
+            completed: this.state.checkbox
+        }
          event.preventDefault();
-         this.props.dispatch(addtodo(this.state.term))
+         this.props.dispatch(addtodo(data))
     }
     togglecheckbox(event){
         event.preventDefault();
-        this.setState({ checkbox : !checkbox}) 
-        // this.setstate({term: event.target.value})
+        // alert("sucess")
+        this.setState({ checkbox : !this.state.checkbox}) 
+        console.log(this.state.checkbox)
+      
     }
 
-  
+ 
     renderList(data,index) {  
         
-        return (<li className="list-group-item" key={index}> <input type="checkbox" onChange={this.togglecheckbox} /> &nbsp; {data.title}</li>); 
+        return (<li className="list-group-item" key={index}> <input type="checkbox" checked={data.completed} onChange={this.togglecheckbox} /> &nbsp; {data.title}</li>); 
     }  
         
             render(){
@@ -49,7 +59,7 @@ class Todolist extends Component {
                                     </div>
                                 </form>
                                 <ul>
-                                    {this.props.todos.map(this.renderList)}
+                                    {this.props.todos.map(this.renderList, this)}
                                 </ul>
                                  
                             </div>)
@@ -57,12 +67,12 @@ class Todolist extends Component {
         }
 
 
-function mapStateToProps(state) {
-    console.log(state);
-    return {
-       todos: state.todos
-    };
-}
+    function mapStateToProps(state) {
+        console.log(state);
+        return {
+        todos: state.todos
+        };
+    }
 
 export default connect(mapStateToProps)(Todolist);
 

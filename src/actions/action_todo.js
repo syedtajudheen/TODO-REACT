@@ -13,19 +13,32 @@ export function fetchtodo(){
     }
 }
 
-export function addtodo(value){
-    console.log(value)
+export function addtodo(data){
+    console.log(data)
     const postrequest = axios.post(URL, 
         {
         userID: 1,
-        title: value,
-        completed: false
+        title: data.title,
+        completed: true
     })
   return{
       type : types.ADD_TODO,
       payload : postrequest
   }
 }
+// export function toggletodo(checkbox){
+//     console.log(checkbox)
+//     const postcompleted = axios.post(URL,
+//         {
+//             userID: 1,
+//             title: title,
+//             completed: false
+//         })
+//     return {
+//         type: types.ADD_TODO,
+//         payload: postcompleted
+//     }
+// }
 
 
 
