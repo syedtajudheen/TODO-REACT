@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { bindActionCreators } from'redux';
+// import { bindActionCreators } from'redux';
 import { fetchtodo, addtodo } from './actions/action_todo.js'
 
 class Todolist extends Component {
@@ -9,7 +9,7 @@ class Todolist extends Component {
         super(props);
         this.state={
                     term:[],
-                    checkbox: false
+                    checkbox: true
         }
            
 
@@ -28,10 +28,18 @@ class Todolist extends Component {
         this.setState({term: event.target.value})
     }
     Onformhandler(event){
+        var complete = prompt("enter your TODO STATUS:");
+        if (complete) {
+            console.log("Ok is true");
+        }
+        else {
+            console.log("cancel is false");
+        }
         const data = {
             title: this.state.term,
-            completed: this.state.checkbox
+            completed: complete
         }
+
          event.preventDefault();
          this.props.dispatch(addtodo(data))
     }
@@ -46,7 +54,7 @@ class Todolist extends Component {
  
     renderList(data,index) {  
         
-        return (<li className="list-group-item" key={index}> <input type="checkbox" checked={data.completed} onChange={this.togglecheckbox} /> &nbsp; {data.title}</li>); 
+        return (<li className="list-group-item" key={data.id}> <input type="checkbox" checked={data.completed} onChange={this.togglecheckbox} /> &nbsp; {data.title}</li>); 
     }  
         
             render(){

@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
-import store from './store/configureStore';
-import $ from 'jquery';
+// import store from './store/configureStore';
+// import $ from 'jquery';
 import { createStore, applyMiddleware} from 'redux';
 import reducer from './reducers/index.js';
 import ReduxPromise from 'redux-promise'

@@ -15,11 +15,12 @@ export function fetchtodo(){
 
 export function addtodo(data){
     console.log(data)
+    
     const postrequest = axios.post(URL, 
         {
         userID: 1,
         title: data.title,
-        completed: true
+        completed: data.completed
     })
   return{
       type : types.ADD_TODO,
