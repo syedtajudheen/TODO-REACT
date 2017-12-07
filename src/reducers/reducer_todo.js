@@ -1,13 +1,6 @@
 import types from '../actions/actionTypes';
 
-// const initialState = [
-//     {
-//         id: 0,
-//         title: 'This is a todo',
-//         completed: false,
-//     },
-// ];
-
+//REDUCERS_TO_FETCH_&_ADD_TODOS
 export default (state = [], action) => {
     switch (action.type) {
         case types.FETCH_TODO: 
@@ -17,5 +10,5 @@ export default (state = [], action) => {
             return [action.payload.data, ...state]
           default:
                 return state;
-        }
     }
+}

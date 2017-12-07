@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Todo from './Todo.js'
 
+//APP_PARENT_COMPONENT
 class App extends Component {
   render() {
     return (
